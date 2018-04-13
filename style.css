@@ -1,0 +1,125 @@
+body {
+	box-sizing: border-box;
+	background: #f5f5f5;
+	margin: 0;
+	padding: 0;
+	font-family: Arial, Helvetica, sans-serif, futura;
+}
+
+* {
+	transition: 0.3s;
+}
+
+*:focus {
+	outline: none;
+}
+
+.Guestbook {
+	margin: 0 auto;
+	background: white;
+	margin-top: 30px;
+	border: 1px solid black;
+	max-width: 80%;
+}
+
+.empty-list {
+	display: block;
+	text-align: center;
+	font-size: 15px;
+	font-weight: bold;
+	height: 200px;
+	line-height: 200px;
+}
+
+.RecordsContent {
+	min-height: 200px;
+	max-height: 550px;
+	overflow-y: auto;
+	margin: 1px;
+	border-bottom: 1px dotted gray;
+	padding-left: 20px;
+	padding-right: 4px;
+}
+
+.CommentInput {
+	display: flex;
+	margin: 0 auto;
+	justify-content: space-between;
+	flex-direction: column;
+	min-height: 114px;
+	max-width: 400px;
+	padding: 2px;
+	border-left: 1px dotted gray;
+	border-right: 1px dotted gray;
+}
+
+.record-item {
+	display: flex;
+	flex-direction: column;
+	border-top: 1px solid black;
+	padding-right: 5px;
+	padding-left: 4px;
+	padding: 15px 5px 15px 4px;
+}
+
+.record-user {
+	display: block;
+	margin-left: 15px;
+	font-weight: bold;
+}
+
+.record-msg {
+	display: inline-block;
+	white-space: pre-line;
+}
+
+.record-time {
+	display: inline-flex;
+	justify-content: flex-end;
+}
+
+.input-text {
+	display: inline-flex;
+	min-height: 60px;
+	width: 100%;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	border: 0;
+	border-bottom: 1px solid lightgray;
+	resize: vertical;
+}
+
+.input-name {
+	display: inline-flex;
+	width: 150px;
+	height: 20px;
+	border: 0;
+	border-bottom: 1px solid gray;
+}
+
+.btn-wrapper {
+	display: inline-flex;
+	justify-content: end;
+}
+
+.input-submit {
+	width: 75px;
+	height: 25px;
+	border: 1px solid black;
+	font-family: futura;
+	cursor: pointer;
+	background: #eee;
+}
+
+.input-submit:hover {
+	background: #ddd;
+}
+
+.record-item:last-child {
+	padding-bottom: 0;
+}
+
+.record-item:first-child {
+	border-top: none;
+	padding-top: 15px;
+}
