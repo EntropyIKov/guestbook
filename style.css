@@ -14,7 +14,7 @@ body {
 	outline: none;
 }
 
-.Guestbook {
+.guestbook {
 	margin: 0 auto;
 	background: white;
 	margin-top: 30px;
@@ -22,13 +22,22 @@ body {
 	max-width: 80%;
 }
 
-.empty-list {
-	display: block;
+.guestbook__record_empty {
 	text-align: center;
 	font-size: 15px;
 	font-weight: bold;
 	height: 200px;
 	line-height: 200px;
+}
+
+.guestbook__content {
+	min-height: 200px;
+	max-height: 550px;
+	overflow-y: auto;
+	margin: 1px;
+	border-bottom: 1px dotted gray;
+	padding-left: 20px;
+	padding-right: 4px;
 }
 
 .RecordsContent {
@@ -41,7 +50,7 @@ body {
 	padding-right: 4px;
 }
 
-.CommentInput {
+.guestbook__comment {
 	display: flex;
 	margin: 0 auto;
 	justify-content: space-between;
@@ -53,7 +62,7 @@ body {
 	border-right: 1px dotted gray;
 }
 
-.record-item {
+.guestbook__record {
 	display: flex;
 	flex-direction: column;
 	border-top: 1px solid black;
@@ -62,23 +71,22 @@ body {
 	padding: 15px 5px 15px 4px;
 }
 
-.record-user {
+.guestbook__record-user {
 	display: block;
 	margin-left: 15px;
 	font-weight: bold;
 }
 
-.record-msg {
+.guestbook__record-msg {
 	display: inline-block;
 	white-space: pre-line;
 }
 
-.record-time {
+.guestbook__record-date {
 	display: inline-flex;
 	justify-content: flex-end;
 }
-
-.input-text {
+.guestbook__message {
 	display: inline-flex;
 	min-height: 60px;
 	width: 100%;
@@ -89,7 +97,7 @@ body {
 	resize: vertical;
 }
 
-.input-name {
+.guestbook__name {
 	display: inline-flex;
 	width: 150px;
 	height: 20px;
@@ -97,12 +105,12 @@ body {
 	border-bottom: 1px solid gray;
 }
 
-.btn-wrapper {
+.guestbook__button-wrapper {
 	display: inline-flex;
 	justify-content: end;
 }
 
-.input-submit {
+.guestbook__submit {
 	display: block;
 	margin: 0 auto;
 	width: 75px;
@@ -113,15 +121,15 @@ body {
 	background: #eee;
 }
 
-.input-submit:hover {
+.guestbook__submit:hover {
 	background: #ddd;
 }
 
-.record-item:last-child {
+.guestbook__record:last-child {
 	padding-bottom: 0;
 }
 
-.record-item:first-child {
+.guestbook__record:first-child {
 	border-top: none;
 	padding-top: 15px;
 }

@@ -3,10 +3,22 @@
 const fs = 'filesaver.php';
 
 window.onload = function() {
-	var inputName	= $('.Guestbook .CommentInput .input-name')[0];
-	var inputMsg	= $('.Guestbook .CommentInput .input-text')[0];
-	var submitBtn	= $('.Guestbook .CommentInput .input-submit')[0];
-	var recordList	= $('.RecordsContent')[0];
+	var inputName	= $('.guestbook__name');
+	var inputMsg	= $('.guestbook__message');
+	var submitBtn	= $('.guestbook__submit');
+	var recordList	= $('.guestbook__content');
+
+
+	function addRecord(record) {
+		recordList.prepend("\
+			<div class='guestbook__record'>\
+				<div>\
+					<span class='guestbook__record-user'>" + record.user + "</span>\
+			 		<span class='guestbook__record-msg'>" + record.msg + "</span>\
+				</div>\
+			 	<span class='guestbook__record-date' server-time='" + record.time + "'>" + record.date + "</span>\
+			</div>");
+	}
 
 	// Loading records
 	var loadAllRecords = function() {
@@ -16,16 +28,17 @@ window.onload = function() {
 		})
 		.then(function(json){
 			if(json['status'] === 200){
-				if(json['html']) {
-					json['html'].forEach((record) => {
-						recordList.innerHTML = record + recordList.innerHTML;
+				if(json['response']) {
+					json['response'].forEach((record) => {
+						addRecord(record);
 					});
 				} else {
-					recordList.innerHTML = "<li class='empty-list'>There are no records</li>";
+					recordList.append("<div class='guestbook__record_empty'>There are no records</div>");
 				}
 			}
 			if(json['status'] === 400) {
-				alert('Sorry, server is not available now');
+				alert(json['error']);
+				recordList.append("<div class='guestbook__record_empty'>There are no records</div>");
 			}
 		});
 	}();
@@ -33,10 +46,10 @@ window.onload = function() {
 
 	// Event listeners
 	var submit = function(ex) {
-		if(inputName.value && inputMsg.value) {
+		if(inputName.val() && inputMsg.val()) {
 			let form = new FormData();
-			form.append('user', inputName.value);
-			form.append('msg', inputMsg.value);
+			form.append('user', inputName.val());
+			form.append('msg', inputMsg.val());
 			var promise = fetch(fs, {
 				method: 'POST',
 				body: form
@@ -46,35 +59,32 @@ window.onload = function() {
 			})
 			.then(function(json){
 				if(json['status'] === 200){ 
-					let empty = $('.empty-list')[0];
-					if(empty) empty.remove();
-
-					recordList.innerHTML = json['html'][0] + recordList.innerHTML;
-					inputMsg.value = '';
-					inputName.value = '';
-					$('.RecordsContent')[0].scrollTop = 0;
+					$('.guestbook__record_empty').remove();
+					addRecord(json['response']);
+					inputMsg.val('');
+					inputName.val('');
+					$('.guestbook__content').scrollTop();
 				}
 				if(json['status'] === 400) {
-					alert('Sorry, server is not available now');
+					alert(json['error']);
 				}
 			});
 		}
 	}
 
-	submitBtn.addEventListener('click', submit);
-	inputMsg.addEventListener('keypress', function(e){
+	$('.guestbook').on('click', '.guestbook__submit', submit);
+	$('.guestbook').on('keypress', '.guestbook__message', function(e) {
 		var key = e.which || e.keyCode;
 		if (key === 13) { 
 			if(!e.shiftKey) {
 				submit(e);
 			}
 		}
-	})
-
-
-}
-
-
-function $(exp){
-	return document.querySelectorAll(exp);
+	});
+	$('.guestbook').on('keypress', '.guestbook__name', function(e) {
+		var key = e.which || e.keyCode;
+		if (key === 13) { 
+			submit(e);
+		}
+	});
 }
