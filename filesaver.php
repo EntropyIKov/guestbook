@@ -6,7 +6,7 @@ function removeBrackets($str)
 
 $file_content = file_get_contents('records.json');
 $json = null;
-$json = json_decode($file_content);
+$json = json_decode($file_content);	
 
 if(isset($_POST['user']) && isset($_POST['msg']))
 {
